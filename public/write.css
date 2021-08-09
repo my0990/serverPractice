@@ -1,0 +1,30 @@
+#wrapper {
+    margin: 50px; 
+    margin-top: 30px;
+}
+
+#wrapper p {
+    margin: 0;
+}
+
+#wrapper input {
+    margin-bottom: 20px;
+    width: 500px;
+    border: 1px solid #6c757d;
+    border-radius: 5px;
+}
+
+#wrapper :nth-child(5) {
+    height: 50px;
+}
+
+#wrapper button {
+    display: block;
+}
+
+#wrapper h4 {
+    font-weight: bold;
+}
+
+
+
