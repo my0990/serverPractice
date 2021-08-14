@@ -19,7 +19,7 @@
           <p>글번호: <%= posts[i]._id %></p>
           <h4>할일: <%= posts[i].제목 %></h4>
           <p>내용: <%= posts[i].내용 %></p>
-          <button class="delete" data-id="<%= posts[i]._id %>">delete</button>
+          <button class="delete btn btn-danger" data-id="<%= posts[i]._id %>">delete</button>
         </li>
         <% } %>
       </ul>
@@ -41,6 +41,7 @@
           $(this).parent('li').fadeOut();
         })
       });
+      
     </script>
   
   </body>

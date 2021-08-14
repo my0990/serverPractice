@@ -12,32 +12,17 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Things to do</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+    <%- include('nav.html') %>
       <div id="wrapper">
-        <form action="/add" method="POST">
+        <form action="/edit?_method=PUT" method="POST">
             <h4>기록해도 안할거 알지만</h4>
             <p>오늘의 할일</p>
-            <input name="title">
+            <input value="<%= post._id %>" name="id" style="display: none"> 
+            <input value="<%= post.제목 %>" name="title">
             <p>세부내용</p>
-            <input name='content'>
+            <input value="<%= post.내용 %>" name='content'>
             
-            <button type="submit" class="btn btn-outline-secondary">저장하기</button>
+            <button type="submit" class="btn btn-outline-secondary">submit</button>
         </form>
       </div>
 

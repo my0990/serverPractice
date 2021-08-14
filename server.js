@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 app.use(express.urlencoded({extended: true})); //body 사용
 const MongoClient = require('mongodb').MongoClient;
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
 
 
 var db;
@@ -16,7 +18,7 @@ MongoClient.connect('mongodb+srv://admin:qwer1234@cluster0.i0oe3.mongodb.net/Tod
 
 
 app.get('/',function(req,res){
-    res.sendFile(__dirname + '/index.html')
+    res.render('index.ejs')
 });
 
 
@@ -25,7 +27,7 @@ app.get('/pet',function(req,res){
 });
 
 app.get('/write',function(req,res){
-    res.sendFile(__dirname + '/write.html')
+    res.render('write.ejs')
 });
 
 app.get('/test',function(req,res){
@@ -71,3 +73,18 @@ app.get('/detail/:id',function(req,res){
         res.render('detail.ejs', {data: 결과})
     })
 })
+
+app.get('/edit/:id', function(req,res){
+    db.collection('post').findOne({_id: parseInt(req.params.id)},function(에러,결과){
+        res.render('edit.ejs', {post: 결과})
+        console.log(결과)
+    })
+})
+
+app.put('/edit',function(req,res){
+    db.collection('post').updateOne({_id: parseInt(req.body.id)},{$set: {제목: req.body.title, 내용: req.body.content}},function(에러,결과){
+        console.log('수정완료')
+        res.redirect('/list')
+    });
+})
+
