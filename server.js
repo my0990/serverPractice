@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({extended: true})); //body 사용
 const MongoClient = require('mongodb').MongoClient;
 
 
@@ -54,5 +54,20 @@ app.get('/list', function(req,res){
     db.collection('post').find().toArray(function(에러,결과){
         console.log(결과)
         res.render('list.ejs',{posts: 결과})
+    })
+})
+
+app.delete('/delete',function(req,res){
+    req.body._id = parseInt(req.body._id)
+    db.collection('post').deleteOne(req.body,function(에러,결과){
+        console.log('삭제완료')
+    })
+    res.send('삭제완료')
+})
+
+app.get('/detail/:id',function(req,res){
+    db.collection('post').findOne({_id: parseInt(req.params.id)},function(에러,결과){
+        if(에러){return res.send('에러')}
+        res.render('detail.ejs', {data: 결과})
     })
 })
